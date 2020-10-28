@@ -52,10 +52,10 @@ def main():
                 stored_file_content.splitlines(), request.text.splitlines(), lineterm=""
             )
             diff_list = list(diff)
-            diff_list.pop(0)
-            diff_list.pop(0)
-            diff_content = "\n".join(diff_list)
-            if diff_content:
+            if diff_list:
+                diff_list.pop(0)
+                diff_list.pop(0)
+                diff_content = "\n".join(diff_list)
                 diff_content = "```" + diff_content + "```"
                 print("differences found, overwriting file")
                 if storage_file.exists():
