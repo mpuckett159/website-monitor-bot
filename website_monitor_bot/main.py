@@ -48,8 +48,9 @@ def main():
             print("found file, loading")
             with open(storage_file.as_posix(), "r") as f:
                 stored_file_content = f.read()
-            diff = difflib.context_diff(request.text, stored_file_content)
-            diff_content = "".join(diff)
+            diff = difflib.unified_diff(stored_file_content.splitlines(), request.text.splitlines(), lineterm="")
+            diff_content = "\n".join(diff)
+            diff_content = "```"+diff_content+"```"
             if diff_content:
                 print("differences found, overwriting file")
                 if storage_file.exists():
