@@ -50,8 +50,8 @@ def main():
                 stored_file_content = f.read()
             diff = difflib.unified_diff(stored_file_content.splitlines(), request.text.splitlines(), lineterm="")
             diff_content = "\n".join(diff)
-            diff_content = "```"+diff_content+"```"
             if diff_content:
+                diff_content = "```"+diff_content+"```"
                 print("differences found, overwriting file")
                 if storage_file.exists():
                     storage_file.unlink()
